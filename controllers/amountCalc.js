@@ -1,4 +1,5 @@
 const User = require('../models/user'),
+      Balance = require('../models/balance'),
       config = require('../config/main');
       const setUserInfo = require('../helpers').setUserInfo;
       var ObjectId = require('mongoose').Types.ObjectId;
@@ -17,12 +18,17 @@ exports.amountCalc = function(req,res,next){
                   if (err) throw err;                  
                   if (acc){
                         var d = new Date();
-            var totdays = daysInMonth(d.getMonth(),d.getFullYear());
-            var n = d.getDate();
-            var a = (n * (acc.acc_amt/parseFloat(totdays + 1))).toFixed(2) ;
-            res.json({a:a});
-                  }
+                        var totdays = daysInMonth(d.getMonth(),d.getFullYear());
+                        var n = d.getDate();
+                        var a = (n * (acc.acc_amt/parseFloat(totdays + 1))).toFixed(2) ;
+                        Balance.findOne({user_id: id},function(err,bal){
+                              if(bal){
+                                    a=a - parseInt(bal.amount);
 
+                              }
+                              res.json({a:a});
+                        })                     
+                  }
             })
       })
       	

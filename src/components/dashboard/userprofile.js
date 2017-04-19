@@ -60,17 +60,6 @@ class userprofile extends Component {
     this.setState({modalIsOpen: false});
   }
  
-componentWillMount(){
-  this.props.getUser(this.props.params.id)
-  
-}
-  componentWillUpdate(nextProps){
-   // if(this.props.profile != nextProps.profile)
- // this.props.getUser(this.props.params.id)
-}
-componentWillUpdate(nextProps){
-  return(this.props.profile !== nextProps.profile)
-}
    render() {
   const cdate = (new Date(this.props.profile.unsuspended_date)).toDateString();
     
@@ -103,7 +92,7 @@ componentWillUpdate(nextProps){
    return(
     <div className="row">
       <div className="col-md-4">
-        <img src={ '/components/dashboard/' + this.props.params.id + '.jpg' } />
+        <img src={ CLIENT_ROOT_URL + '/uploads/' + this.props.params.id + '.jpg' } />
       </div>
       <div className="col-md-4 ">
       <table className="table table-striped">

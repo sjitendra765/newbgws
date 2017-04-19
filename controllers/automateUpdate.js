@@ -29,9 +29,7 @@ var Account_type = require('../models/account_type');
 					y = y-1 ;
 				}
 				else {
-					n = n+1;
-					
-					console.log(y)
+					n = n+1;					
 				}
 				Deposit.find({date:{$lt : new Date(), $gte: new Date(y,n)}},function(err,depos){
 					if(err) throw err;

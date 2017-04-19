@@ -10,7 +10,7 @@ const User = require('../models/user'),
  const Account_type = require('../models/account_type');
 
  exports.depositmanual = function(req,res){
- 	User.find({role:'Teller'},function(err,users){
+ 	User.find({role:'Member'},function(err,users){
     	if (err) throw err;
     	var i = 0;
 			//while (i < users.length){
@@ -21,17 +21,19 @@ const User = require('../models/user'),
 
 				var u = users[i];
 				userid=users[i]._id;
+				console.log(u.accountType)
 				Account_type.findOne({acc_type : u.accountType},function(err,acc){
-						
+						if(err) throw err;
 				let deposits = new Deposit({
 					user_id : users[i]._id,
-					amount : 10000
+					amount : parseInt(acc.acc_amt),
+					depositBy : 'Manual'
 				});
 				deposits.save(function(err,dep){
 					if(err) throw err;	
 						Balance.findOne({user_id:ObjectId(userid)},function(err,bal){
- 					if(bal){
- 						bal.amount= parseInt(bal.amount) + parseInt(req.body.amount);
+ 					if(bal){ 						
+ 						bal.amount= parseInt(bal.amount) + parseInt(acc.acc_amt);
  						bal.save(function(err,b){
  							console.log("success");
  						})

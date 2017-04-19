@@ -116,7 +116,8 @@ const amt_remain = "Reamining Amount: Rs." + actBal;
  			amount = req.body.amount;
  	let deposit = new Deposit({
  				user_id : user_id,
- 				amount : amount
+ 				amount : amount,
+ 				depositBy: 'Manual'
  			});
  			deposit.save(function(err,data){
  				res.json({ mes:'success'});

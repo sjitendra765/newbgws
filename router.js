@@ -98,7 +98,10 @@ var upload = multer({ storage: storage })
   authRoutes.post('/upload/:id',upload.single('photo'),function(req,res,next){
    console.log(req.file);
    //fs.rename('./uploads/Chrysanthemum.jpg', './uploads/AF.jpg', function(err) {
-
+    var filePath = path.resolve(__dirname) + req.params.id + '.jpg'; 
+      fs.unlinkSync(filePath);
+    var filePath = path.resolve(__dirname) + req.params.id + '.png';
+      fs.unlinkSync(filePath);    
    const user_id = req.params.id,
         filename = req.file.originalname,
         imagename = filename.replace(filename.split(".")[0],  user_id );

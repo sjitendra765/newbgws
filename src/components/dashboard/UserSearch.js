@@ -41,8 +41,8 @@ class UserSearch extends Component{
     this.props.searchUser(formProps)
 
   }
-  viewUser(){
-
+  viewUser(id){
+  	this.props.getUser(id)
   }
   editUser(id){
   	this.props.getUser(id)
@@ -56,7 +56,7 @@ class UserSearch extends Component{
   	  block: test.blocked ? 'unblock' : 'block'	,
   	  i:i,
   	  b:test.blocked ? false : true});
-    console.log('kjij',this.state.b,i);
+    console.log('kjjihguycgfbvjyftgfcbvbhytfcvbnnjuytgbvbnij',this.state.b,i);
 
   }
   openModal1(test,i) {
@@ -69,17 +69,19 @@ class UserSearch extends Component{
   	  b:test.suspended ? false : true	});
     console.log(this.state.block);
   }
-  setBlockValue(){
-  		this.setState({modalIsOpen: false
-  			});
-  		console.log('block value',this.state.id1);
+  setBlockValue(){ 		
 
   		if (this.state.block == 'block' || this.state.block == 'unblock')	{
+  			console.log("kjiikj",this.state.id1,this.state.b)
   			this.props.blockUser(this.state.id1,this.state.b,this.state.i);
   		}	else if (this.state.block == 'suspend' || this.state.block == 'unsuspend'){
+  			console.log('nvngvgb')
   			this.props.suspendUser(this.state.id1,this.state.b,this.state.i);
-  		}
-
+  		} else
+  		return;
+this.setState({modalIsOpen: false
+  			});
+  		console.log('block value',this.state.id1);
 
   }
   block(u,i){
@@ -177,7 +179,7 @@ class UserSearch extends Component{
 					<td>{u.bankBranch}</td>
 					<td>{u.suspended ? 'true' : 'false'}</td>
 
-					<td><button className="btn btn-info"><a href={`/dashboard/userprofile/${u._id}`}>View</a></button>
+					<td><button className="btn btn-info" onClick={this.viewUser.bind(this,u._id)}>View</button>
 						{role2?<button className="btn btn-success" ><a href={`/dashboard/editprofile/${u._id}`}>Edit</a></button> :''}
 						 {role?<span> <button className="btn btn-danger" onClick={this.openModal.bind(this,u,i)}>{u.blocked ? 'Unblock' : 'Block' }</button>
 						 <button className="btn btn-danger" onClick={this.openModal1.bind(this,u,i)}>{u.suspended ? 'Unsuspend' : 'Suspend' }</button></span>: ''}

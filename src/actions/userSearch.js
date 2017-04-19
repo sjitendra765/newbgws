@@ -33,7 +33,7 @@ export function getUser(uid){
         type: FETCH_PROFILE,
         payload: response.data.user
       });
-      // window.location.href = `${CLIENT_ROOT_URL}/dashboard/editprofile`;
+       window.location.href = `${CLIENT_ROOT_URL}/dashboard/userprofile/${uid}`;
     })
     .catch((error)=>{
         console.log(error)
@@ -42,7 +42,8 @@ export function getUser(uid){
 }
 
 export function blockUser(uid,b,i){
-  console.log("user");
+  console.log("user",b,i,uid);
+  console.log(b)
   return function(dispatch){
    axios.post(`${API_URL}/auth/blockuser/${uid}`,config)
       .then(response =>{
