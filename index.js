@@ -10,10 +10,12 @@ var configWebpack = require('./webpack.config.js');
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+var User = require('./models/user');
 
       // Database Connection
       
 mongoose.connect(config.database); 
+
 
 var compiler = webpack(configWebpack);
 

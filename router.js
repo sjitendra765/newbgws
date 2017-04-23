@@ -34,7 +34,7 @@ const REQUIRE_ADMIN = "Admin",
   apiRoutes.use('/auth', authRoutes);
 
   // Registration route
-  authRoutes.post('/register', AuthenticationController.register);
+  authRoutes.post('/register');
 
   // Login route
   authRoutes.post('/login', requireLogin, AuthenticationController.login);

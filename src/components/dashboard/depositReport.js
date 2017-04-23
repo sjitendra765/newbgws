@@ -1,7 +1,7 @@
 import React ,{ Component} from 'react'
 import { connect } from 'react-redux';
 //import { reportByBank,reportByBranch,reportByDeposit} from '../../actions/admin';
-import CsvDownloader from 'react-csv-downloader';
+import {CSVLink, CSVDownload} from 'react-csv';
 
 class depositReport extends Component {
 
@@ -121,17 +121,14 @@ else if (this.props.genReport == 'Deposit By' || this.props.genReport == 'Withdr
 				id:'By',
 				displayName: 'By'
 			}];
-		
+		console.log(this.props.reports)
 			 datas = this.props.reports;
 		}
 return(
 		 <div>
-		 <CsvDownloader
-	        filename="report"
-	        separator=","
-	        columns={columns}
-	        datas={datas}
-	        text="DOWNLOAD" />
+	<CSVLink data={datas} separator={","} filename={"reports.csv"}>
+    Download
+</CSVLink>
     	</div>
     )
 }
